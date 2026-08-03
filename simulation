@@ -1,0 +1,11 @@
+#!/bin/bash
+
+iverilog -o calculator_sim \
+../src/calculator.v \
+../testbench/calculator_tb.v
+
+
+vvp calculator_sim
+
+
+mv waveform.vcd ./waveform.vcd

@@ -1,0 +1,69 @@
+`timescale 1ns/1ps
+
+module calculator_tb;
+
+reg [7:0] A;
+reg [7:0] B;
+reg [1:0] opcode;
+
+wire [15:0] result;
+
+
+calculator DUT(
+    .A(A),
+    .B(B),
+    .opcode(opcode),
+    .result(result)
+);
+
+
+initial begin
+
+    $dumpfile("waveform.vcd");
+    $dumpvars(0, calculator_tb);
+
+
+    // Addition
+    A = 10;
+    B = 5;
+    opcode = 2'b00;
+    #10;
+
+
+    // Subtraction
+    A = 10;
+    B = 5;
+    opcode = 2'b01;
+    #10;
+
+
+    // Multiplication
+    A = 10;
+    B = 5;
+    opcode = 2'b10;
+    #10;
+
+
+    // Division
+    A = 10;
+    B = 5;
+    opcode = 2'b11;
+    #10;
+
+
+    $finish;
+
+end
+
+
+initial begin
+
+    $monitor(
+        "Time=%0t A=%d B=%d opcode=%b Result=%d",
+        $time,A,B,opcode,result
+    );
+
+end
+
+
+endmodule
